@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 
 class AppBarBloc {
-  final String _appBarText = 'Новости';
+  final List<String> _screensNames = ['Новости', 'Фильмы', 'Сериалы'];
 
 // that take number of screen
   final StreamController<int> _eventController = StreamController<int>();
@@ -11,16 +12,7 @@ class AppBarBloc {
   Stream<String> get stream => _stateController.stream;
 
   void _mapEventToState(int numberOfPage) {
-    if (numberOfPage == 0) {
-      _appBarText == 'Новости';
-    } else if (numberOfPage == 1) {
-      _appBarText == 'Фильмы';
-    } else if (numberOfPage == 2) {
-      _appBarText == 'Сериалы';
-    } else {
-      throw 'Type error';
-    }
-    _stateController.sink.add(_appBarText);
+    _stateController.sink.add(_screensNames[numberOfPage]);
   }
 
   AppBarBloc() {
